@@ -4,14 +4,23 @@ export enum LogLevels {
   high = 'high',
 }
 
+export interface LogEntityOptions {
+  level: LogLevels;
+  message: string;
+  origin: string;
+  createdAt?: Date;
+}
+
 export class LogEntity {
   public level: LogLevels;
   public message: string;
   public createdAt: Date;
+  public origin: string;
 
-  constructor(message: string, level: LogLevels) {
+  constructor({ level, message, origin, createdAt = new Date() }: LogEntityOptions) {
     this.message = message;
     this.level = level;
-    this.createdAt = new Date();
+    this.origin = origin;
+    this.createdAt = createdAt;
   }
 }
