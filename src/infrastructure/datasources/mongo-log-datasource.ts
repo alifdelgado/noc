@@ -10,13 +10,8 @@ export class MongoLogDatasource implements LogDatasource {
   }
   async getLogs(logLevel: LogLevels): Promise<LogEntity[]> {
     const logs = await LogModel.find({ level: logLevel });
-    return logs.map(({ level, message, origin, createdAt }: { [key: string]: any }) => {
-      return new LogEntity({
-        level,
-        message,
-        origin,
-        createdAt,
-      });
-    });
+    return logs.map(({ level, message, origin, createdAt }: { [key: string]: any }) =>
+      LogEntity.objectToEntity({ level, message, origin, createdAt }),
+    );
   }
 }

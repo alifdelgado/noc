@@ -23,4 +23,13 @@ export class LogEntity {
     this.origin = origin;
     this.createdAt = createdAt;
   }
+
+  static objectToEntity({ level, message, origin, createdAt }: { [key: string]: any }): LogEntity {
+    return new LogEntity({
+      level,
+      message,
+      origin,
+      createdAt,
+    });
+  }
 }
